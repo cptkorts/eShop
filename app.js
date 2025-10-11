@@ -6,13 +6,13 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const csrf = require("csurf");
-const flash = require('connect-flash')
+const flash = require("connect-flash");
 
 const errorController = require("./controllers/error");
 const User = require("./models/user");
 
 const MONGODB_URI =
-  "mongodb+srv://cptkorts:xcPvRYclQGEGBMPh@cluster0.goiipf1.mongodb.net/shop?retryWrites=true&w=majority&appName=Cluster0";
+  "mongodb+srv://cptkorts:FrBD$2$8uXUJjPn@cluster0.goiipf1.mongodb.net/shop?retryWrites=true&w=majority&appName=Cluster0";
 
 const app = express();
 const store = new MongoDBStore({
