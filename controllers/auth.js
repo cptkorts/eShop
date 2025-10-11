@@ -1,6 +1,23 @@
 const bcrypt = require("bcryptjs");
+const nodemailer = require("nodemailer");
+const sendgridTransport = require("nodemailer-sendgrid-transport");
+const sgMail = require("@sendgrid/mail");
 
 const User = require("../models/user");
+
+const transporter = nodemailer.createTransport(
+  sendgridTransport({
+    auth: {
+      api_key:
+        "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",
+    },
+  })
+);
+
+sgMail.setApiKey(
+  "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"
+);
+// sgMail.setDataResidency("eu");
 
 exports.getLogin = (req, res, next) => {
   let message = req.flash("error");
@@ -81,6 +98,12 @@ exports.postSignup = (req, res, next) => {
     })
     .then((result) => {
       res.redirect("/login");
+      return sgMail.send({
+        to: email,
+        from: "shop@node-complete.com",
+        subject: "Signup succeded!",
+        html: "<h1>You successfully signed up!</h1>",
+      });
     })
     .catch((err) => console.log(err));
 };
