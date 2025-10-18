@@ -126,13 +126,18 @@ exports.getCheckout = (req, res, next) => {
         payment_method_types: ["card"],
         line_items: products.map((p) => {
           return {
-            name: p.productId.title,
-            description: p.productId.description,
-            amount: p.productId.price * 100,
-            currency: "usd",
+            price_data: {
+              currency: "usd",
+              product_data: {
+                name: p.productId.title,
+                description: p.productId.description,
+              },
+              unit_amount: p.productId.price * 100,
+            },
             quantity: p.quantity,
           };
         }),
+        mode: "payment",
         success_url:
           req.protocol + "://" + req.get("host") + "/checkout/success",
         cancel_url: req.protocol + "://" + req.get("host") + "/checkout/cancel",

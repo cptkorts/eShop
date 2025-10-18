@@ -19,12 +19,12 @@
                   <h2>Total: <%= totalSum %></h2>
                 </div>
                 <div class="centered">
-                  <button id="order-btn">ORDER</button>
-                  <script src="https://js.stripe.com/clover/stripe.js"></script>
+                  <button id="order-btn" class="btn">ORDER</button>
+                  <script src="https://js.stripe.com/v3/"></script>
                   <script>
-                    var stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+                    var stripe = Stripe('pk_test_51SJD0F65ocENskKRQGUqCcXABhqnmtzpQug8T4EXAFpvVhumYV4wPPScYKu7q7NqlsO73ZSVxytHPsg3UAxBnpvL002ENhXG8B');
                     var orderBtn = document.getElementById('order-btn')
-                    orderbtn.addEventListener('click', function(){
+                    orderBtn.addEventListener('click', function(){
                       stripe.redirectToCheckout({
                         sessionId: '<%= sessionId %>'
                       })
