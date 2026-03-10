@@ -1,3 +1,5 @@
+require("dotenv").config({ path: ".env.local" });
+
 const path = require("path");
 const fs = require("fs");
 const https = require("https");

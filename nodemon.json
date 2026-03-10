@@ -1,8 +1,1 @@
-{
-  "env": {
-    "MONGO_USER": "cptkorts",
-    "MONGO_PASSWORD": "FrBD$2$8uXUJjPn",
-    "MONGO_DEFAULT_DATABASE": "shop",
-    "STRIPE_KEY": "sk_test_51SJD0F65ocENskKRX9EVcTpRmIzpcFHBy8EsXYHx8q5LzlEUL1l6Y7MECJ4IEhrKuA1JilzEUNwxBTaurMGAuvrX005DhXileL"
-  }
-}
+{}
