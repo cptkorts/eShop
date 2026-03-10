@@ -28,6 +28,7 @@ const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: "sessions",
 });
+store.on("error", (err) => console.error("Session store error:", err));
 const csrfProtection = csrf();
 
 const fileStorage = new CloudinaryStorage({
@@ -39,7 +40,7 @@ const fileStorage = new CloudinaryStorage({
 });
 
 app.set("view engine", "ejs");
-app.set("views", "views");
+app.set("views", path.join(__dirname, "views"));
 
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
