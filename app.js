@@ -125,9 +125,11 @@ app.use((error, req, res, next) => {
   });
 });
 
-mongoose
-  .connect(MONGODB_URI)
-  .then((result) => {
-    app.listen(process.env.PORT || 3000);
-  })
-  .catch((err) => console.log(err));
+mongoose.connect(MONGODB_URI).catch((err) => console.log(err));
+
+// Only start a local HTTP server when running directly (nodemon / node app.js)
+if (require.main === module) {
+  app.listen(process.env.PORT || 3000);
+}
+
+module.exports = app;
