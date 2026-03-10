@@ -148,6 +148,7 @@ exports.getCheckout = (req, res, next) => {
         products: products,
         totalSum: total,
         sessionId: session.id,
+        sessionUrl: session.url,
       });
     })
     .catch((err) => {
@@ -279,7 +280,7 @@ exports.getInvoice = (req, res, next) => {
       res.setHeader("Content-Type", "application/pdf");
       res.setHeader(
         "Content-Disposition",
-        'inline; filename="' + invoiceName + '"'
+        'inline; filename="' + invoiceName + '"',
       );
       pdfDoc.pipe(fs.createWriteStream(invoicePath));
       pdfDoc.pipe(res);
@@ -299,7 +300,7 @@ exports.getInvoice = (req, res, next) => {
               prod.quantity +
               " - " +
               "$" +
-              prod.product.price
+              prod.product.price,
           );
       });
       pdfDoc.text("------");
