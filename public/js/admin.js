@@ -15,7 +15,15 @@ const deleteProduct = (btn) => {
     })
     .then((data) => {
       console.log(data);
-      productElement.remove(productElement);
+      productElement.remove();
     })
     .catch((err) => console.log(err));
 };
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".delete-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      deleteProduct(btn);
+    });
+  });
+});

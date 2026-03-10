@@ -21,6 +21,9 @@
             </div> -->
             <div class="form-control">
                 <label for="image">Image</label>
+                <% if (editing && product.imageUrl) { %>
+                  <img src="<%= product.imageUrl.startsWith('http') ? product.imageUrl : '/' + product.imageUrl %>" alt="Current image" style="max-width:200px;display:block;margin-bottom:8px;">
+                <% } %>
                 <input 
                 type="file" 
                 name="image" 

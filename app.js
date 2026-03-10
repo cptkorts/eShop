@@ -50,7 +50,17 @@ const accessLogStream =
     ? process.stdout
     : fs.createWriteStream(path.join(__dirname, "access.log"), { flags: "a" });
 
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "img-src": ["'self'", "data:", "https://res.cloudinary.com"],
+        "script-src": ["'self'"],
+      },
+    },
+  })
+);
 app.use(compression());
 app.use(morgan("combined", { stream: accessLogStream }));
 
@@ -59,6 +69,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(multer({ storage: fileStorage }).single("image"));
 
 app.use(express.static(path.join(__dirname, "public")));
+if (process.env.NODE_ENV !== "production") {
+  app.use("/images", express.static(path.join(__dirname, "images")));
+}
 app.use(
   session({
     secret: "my secret",
