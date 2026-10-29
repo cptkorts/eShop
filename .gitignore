@@ -3,3 +3,4 @@ images/
 access.log
 *.env
 .env.local
+data/invoices/*.pdf

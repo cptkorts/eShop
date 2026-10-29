@@ -1,25 +1,13 @@
 const crypto = require("crypto");
 
 const bcrypt = require("bcryptjs");
-const nodemailer = require("nodemailer");
-const sendgridTransport = require("nodemailer-sendgrid-transport");
 const sgMail = require("@sendgrid/mail");
 const { validationResult } = require("express-validator");
 
 const User = require("../models/user");
 
-const transporter = nodemailer.createTransport(
-  sendgridTransport({
-    auth: {
-      api_key:
-        "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",
-    },
-  })
-);
-
-sgMail.setApiKey(
-  "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"
-);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const SENDER_EMAIL = process.env.SENDGRID_FROM_EMAIL;
 // sgMail.setDataResidency("eu");
 
 exports.getLogin = (req, res, next) => {
@@ -159,7 +147,7 @@ exports.postSignup = (req, res, next) => {
       res.redirect("/login");
       return sgMail.send({
         to: email,
-        from: "shop@node-complete.com",
+        from: SENDER_EMAIL,
         subject: "Signup succeded!",
         html: "<h1>You successfully signed up!</h1>",
       });
@@ -212,7 +200,7 @@ exports.postReset = (req, res, next) => {
         res.redirect("/");
         sgMail.send({
           to: req.body.email,
-          from: "shop@node-complete.com",
+          from: SENDER_EMAIL,
           subject: "Password Reset",
           html: `
             <p>You requested a password reset</p>
